@@ -26,7 +26,7 @@ int main()
 		//TraceLog(LOG_INFO, TextFormat("background Count: %i", backgroundCount));
 
 		// inputs
-		if(IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+		if(IsMouseButtonDown(MOUSE_LEFT_BUTTON))
 		{// create object and store in vector
 			Vector2 m = GetMousePosition();
 			circles.push_back({m.x, m.y, r, color});
@@ -77,6 +77,12 @@ int main()
 		BeginDrawing();
 		ClearBackground(background);
 
+		// draw circles
+		for(const Circle& c : circles)
+		{
+			c.draw();
+		}
+
 		DrawText(TextFormat("no of circles: %i", circles.size()), 10, 10, 40, DARKGRAY);
 		DrawText(TextFormat("radius: %i [R & T]", r), 10, 50, 40, DARKGRAY);
 		DrawText(TextFormat("red value: %i [1 & 2]", color.r), 10, 90, 40, DARKGRAY);
@@ -84,12 +90,6 @@ int main()
 		DrawText(TextFormat("blue value: %i [5 & 6]", color.b), 10, 170, 40, DARKGRAY);
 		DrawText(TextFormat("alpha value: %i [7 & 8]", color.a), 10, 210, 40, DARKGRAY);
 		DrawText(TextFormat("background: %s [Z]", backgroundName.c_str()), 10, 250, 40, DARKGRAY);
-
-		// draw circles
-		for(const Circle& c : circles)
-		{
-			c.draw();
-		}
 
 		EndDrawing();
 	}
